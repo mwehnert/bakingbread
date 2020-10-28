@@ -1,44 +1,21 @@
 // Gatsby supports TypeScript natively!
-import React from "react"
+import React, { ReactElement } from "react"
 import { PageProps, Link, graphql } from "gatsby"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
+import Image from "gatsby-image"
+import Layout from "../components/Layout"
+import SEO from "../components/Seo"
+import { BlogPageQuery } from "../../gatsby-graphql"
 
 type PageContext = {
   currentPage: number
   numPages: number
 }
-type Data = {
-  site: {
-    siteMetadata: {
-      title: string
-    }
-  }
-  allMarkdownRemark: {
-    edges: {
-      node: {
-        excerpt: string
-        frontmatter: {
-          title: string
-          date: string
-          description: string
-        }
-        fields: {
-          slug: string
-        }
-      }
-    }[]
-  }
-}
 
 const BlogIndex = ({
   data,
-  location,
   pageContext,
-}: PageProps<Data, PageContext>) => {
-  const siteTitle = data.site.siteMetadata.title
-  const posts = data.allMarkdownRemark.edges
+}: PageProps<BlogPageQuery, PageContext>): ReactElement => {
+  const posts = data.allMdx.edges
   const { currentPage, numPages } = pageContext
 
   const isFirst = currentPage === 1
@@ -47,34 +24,53 @@ const BlogIndex = ({
   const nextPage = (currentPage + 1).toString()
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout>
       <SEO title="All posts" />
-      {posts.map(({ node }) => {
-        const title = node.frontmatter.title || node.fields.slug
-        return (
-          <article key={node.fields.slug}>
-            <header>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-            </header>
-            <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
-            </section>
-          </article>
-        )
-      })}
+      <div className="mt-24">
+        {posts.map(({ node }) => {
+          const title = node?.frontmatter?.title || node?.fields?.slug
+
+          if (!title || !node?.fields?.slug || !node?.frontmatter) return <></>
+
+          return (
+            <article
+              className="flex flex-col xl:flex-row my-2"
+              key={node.fields.slug}
+            >
+              {node.frontmatter.image && node.frontmatter.image.feature && (
+                <div className="w-full xl:w-1/3 flex-shrink-0 xl:mr-8">
+                  <Image
+                    className="w-full"
+                    alt={node.frontmatter.title}
+                    fluid={
+                      node.frontmatter.image.feature.childImageSharp
+                        ?.fluid as any
+                    }
+                  />
+                </div>
+              )}
+              <div className="flex-shrink">
+                <header>
+                  <h3 className="my-0">
+                    <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                      {title}
+                    </Link>
+                  </h3>
+                  <small>{node.frontmatter.date}</small>
+                </header>
+                <section>
+                  <p
+                    // eslint-disable-next-line react/no-danger
+                    dangerouslySetInnerHTML={{
+                      __html: node.frontmatter.description || node.excerpt,
+                    }}
+                  />
+                </section>
+              </div>
+            </article>
+          )
+        })}
+      </div>
 
       <nav>
         <ul
@@ -109,13 +105,13 @@ const BlogIndex = ({
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query blogPageQuery($skip: Int!, $limit: Int!) {
+  query blogPage($skip: Int!, $limit: Int!) {
     site {
       siteMetadata {
         title
       }
     }
-    allMarkdownRemark(
+    allMdx(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
       skip: $skip
@@ -130,6 +126,15 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             title
             description
+            image {
+              feature {
+                childImageSharp {
+                  fluid {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
           }
         }
       }
