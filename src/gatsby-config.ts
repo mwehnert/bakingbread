@@ -66,6 +66,7 @@ export const plugins = [
       documentPaths: ["./src/**/*.{ts,tsx}", "./node_modules/gatsby-*/**/*.js"],
     },
   },
+  `gatsby-plugin-netlify-cms`,
   `gatsby-transformer-sharp`,
   `gatsby-plugin-sharp`,
   `gatsby-plugin-mdx`,

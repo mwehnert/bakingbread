@@ -3,7 +3,7 @@ import React, { ReactElement } from "react"
 import { PageProps, Link, graphql } from "gatsby"
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
-import { BlogPageQuery } from "../../gatsby-graphql"
+import { BlogPageQuery, MdxFrontmatterImage } from "../../gatsby-graphql"
 import PostCard from "../components/PostCard"
 
 type PageContext = {
@@ -38,12 +38,11 @@ const BlogIndex = ({
               title={node.frontmatter.title}
               description={node.frontmatter.description || node.excerpt}
               date={node.frontmatter.date}
-              image={node.frontmatter.image}
+              image={node.frontmatter?.image as MdxFrontmatterImage}
             />
           )
         })}
       </div>
-
       <nav>
         <ul
           style={{
