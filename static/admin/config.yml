@@ -11,10 +11,31 @@ collections:
     slug: index
     media_folder: ""
     public_folder: ""
-    path: "{{title}}/index"
+    path: "{{slug}}/index"
+    extension: mdx
+    format: frontmatter
     create: true
     fields:
-      - { name: path, label: Path }
-      - { name: date, label: Date, widget: datetime }
-      - { name: title, label: Title }
-      - { name: body, label: Body, widget: markdown }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Description", name: "description", widget: "string" }
+      - label: "Image"
+        name: "image"
+        widget: "object"
+        fields:
+          - { label: "Feature", name: "feature", widget: "image" }
+          - { label: "Credit", name: "credit", widget: "string" }
+          - { label: "Credit-Link", name: "creditlink", widget: "string" }
+      - label: "Steps"
+        name: "steps"
+        widget: "list"
+      - label: "Ingredients"
+        name: "ingredients"
+        widget: "list"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Amount", name: "amount", widget: "number" }
+          - { label: "Unit", name: "unit", widget: "string" }
+          - { label: "Step", name: "step", widget: "number" }
+      - { label: "Body", name: "body", widget: "markdown" }

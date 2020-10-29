@@ -707,6 +707,7 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___ingredients___step'
   | 'childMdx___frontmatter___link'
   | 'childMdx___frontmatter___share'
+  | 'childMdx___frontmatter___slug'
   | 'childMdx___frontmatter___image___credit'
   | 'childMdx___frontmatter___image___creditlink'
   | 'childMdx___slug'
@@ -1461,6 +1462,7 @@ export type MdxFieldsEnum =
   | 'frontmatter___ingredients___step'
   | 'frontmatter___link'
   | 'frontmatter___share'
+  | 'frontmatter___slug'
   | 'frontmatter___image___feature___sourceInstanceName'
   | 'frontmatter___image___feature___absolutePath'
   | 'frontmatter___image___feature___relativePath'
@@ -1634,6 +1636,7 @@ export type MdxFrontmatter = {
   ingredients?: Maybe<Array<Maybe<MdxFrontmatterIngredients>>>;
   link?: Maybe<Scalars['String']>;
   share?: Maybe<Scalars['Boolean']>;
+  slug?: Maybe<Scalars['String']>;
   image?: Maybe<MdxFrontmatterImage>;
 };
 
@@ -1655,6 +1658,7 @@ export type MdxFrontmatterFilterInput = {
   ingredients?: Maybe<MdxFrontmatterIngredientsFilterListInput>;
   link?: Maybe<StringQueryOperatorInput>;
   share?: Maybe<BooleanQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
   image?: Maybe<MdxFrontmatterImageFilterInput>;
 };
 
