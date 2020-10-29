@@ -8,6 +8,7 @@ module.exports = {
         "sidebar-pattern-dark": `url("/images/loafpattern-light.svg")`,
       }),
       spacing: {
+        '2/3': '66.666667%',
         sidebar: "380px",
         "not-sidebar": "calc(100% - 380px)",
         topbar: "16rem",

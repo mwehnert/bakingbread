@@ -1,10 +1,10 @@
 // Gatsby supports TypeScript natively!
 import React, { ReactElement } from "react"
 import { PageProps, Link, graphql } from "gatsby"
-import Image from "gatsby-image"
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
 import { BlogPageQuery } from "../../gatsby-graphql"
+import PostCard from "../components/PostCard"
 
 type PageContext = {
   currentPage: number
@@ -33,41 +33,13 @@ const BlogIndex = ({
           if (!title || !node?.fields?.slug || !node?.frontmatter) return <></>
 
           return (
-            <article
-              className="flex flex-col xl:flex-row my-2"
-              key={node.fields.slug}
-            >
-              {node.frontmatter.image && node.frontmatter.image.feature && (
-                <div className="w-full xl:w-1/3 flex-shrink-0 xl:mr-8">
-                  <Image
-                    className="w-full"
-                    alt={node.frontmatter.title}
-                    fluid={
-                      node.frontmatter.image.feature.childImageSharp
-                        ?.fluid as any
-                    }
-                  />
-                </div>
-              )}
-              <div className="flex-shrink">
-                <header>
-                  <h3 className="my-0">
-                    <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                      {title}
-                    </Link>
-                  </h3>
-                  <small>{node.frontmatter.date}</small>
-                </header>
-                <section>
-                  <p
-                    // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{
-                      __html: node.frontmatter.description || node.excerpt,
-                    }}
-                  />
-                </section>
-              </div>
-            </article>
+            <PostCard
+              slug={node.fields.slug}
+              title={node.frontmatter.title}
+              description={node.frontmatter.description || node.excerpt}
+              date={node.frontmatter.date}
+              image={node.frontmatter.image}
+            />
           )
         })}
       </div>
