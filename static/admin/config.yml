@@ -19,23 +19,46 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Description", name: "description", widget: "string" }
+      - {
+          label: "Description",
+          name: "description",
+          widget: "string",
+          required: false,
+        }
       - label: "Image"
         name: "image"
         widget: "object"
+        required: false
         fields:
           - { label: "Feature", name: "feature", widget: "image" }
-          - { label: "Credit", name: "credit", widget: "string" }
-          - { label: "Credit-Link", name: "creditlink", widget: "string" }
+          - {
+              label: "Credit",
+              name: "credit",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Credit-Link",
+              name: "creditlink",
+              widget: "string",
+              required: false,
+            }
       - label: "Steps"
         name: "steps"
         widget: "list"
+        required: false
       - label: "Ingredients"
         name: "ingredients"
         widget: "list"
+        required: false
         fields:
           - { label: "Name", name: "name", widget: "string" }
-          - { label: "Amount", name: "amount", widget: "number" }
-          - { label: "Unit", name: "unit", widget: "string" }
-          - { label: "Step", name: "step", widget: "number" }
+          - {
+              label: "Amount",
+              name: "amount",
+              widget: "number",
+              required: false,
+            }
+          - { label: "Unit", name: "unit", widget: "string", required: false }
+          - { label: "Step", name: "step", widget: "number", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
