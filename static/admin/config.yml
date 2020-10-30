@@ -25,6 +25,15 @@ collections:
           widget: "string",
           required: false,
         }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        default: "Anderes"
+        options: ["Rezept", "Theorie", "Bäcker", "Anderes"]
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: false
       - label: "Image"
         name: "image"
         widget: "object"
