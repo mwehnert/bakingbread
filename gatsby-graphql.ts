@@ -695,19 +695,20 @@ export type FileFieldsEnum =
   | 'childMdx___rawBody'
   | 'childMdx___fileAbsolutePath'
   | 'childMdx___frontmatter___title'
+  | 'childMdx___frontmatter___slug'
   | 'childMdx___frontmatter___date'
   | 'childMdx___frontmatter___description'
-  | 'childMdx___frontmatter___categories'
-  | 'childMdx___frontmatter___comments'
-  | 'childMdx___frontmatter___slug'
-  | 'childMdx___frontmatter___image___credit'
-  | 'childMdx___frontmatter___image___creditlink'
-  | 'childMdx___frontmatter___steps'
+  | 'childMdx___frontmatter___category'
   | 'childMdx___frontmatter___ingredients'
   | 'childMdx___frontmatter___ingredients___name'
   | 'childMdx___frontmatter___ingredients___amount'
   | 'childMdx___frontmatter___ingredients___unit'
   | 'childMdx___frontmatter___ingredients___step'
+  | 'childMdx___frontmatter___comments'
+  | 'childMdx___frontmatter___image___credit'
+  | 'childMdx___frontmatter___image___creditlink'
+  | 'childMdx___frontmatter___tags'
+  | 'childMdx___frontmatter___steps'
   | 'childMdx___slug'
   | 'childMdx___body'
   | 'childMdx___excerpt'
@@ -1448,11 +1449,16 @@ export type MdxFieldsEnum =
   | 'rawBody'
   | 'fileAbsolutePath'
   | 'frontmatter___title'
+  | 'frontmatter___slug'
   | 'frontmatter___date'
   | 'frontmatter___description'
-  | 'frontmatter___categories'
+  | 'frontmatter___category'
+  | 'frontmatter___ingredients'
+  | 'frontmatter___ingredients___name'
+  | 'frontmatter___ingredients___amount'
+  | 'frontmatter___ingredients___unit'
+  | 'frontmatter___ingredients___step'
   | 'frontmatter___comments'
-  | 'frontmatter___slug'
   | 'frontmatter___image___feature___sourceInstanceName'
   | 'frontmatter___image___feature___absolutePath'
   | 'frontmatter___image___feature___relativePath'
@@ -1491,12 +1497,8 @@ export type MdxFieldsEnum =
   | 'frontmatter___image___feature___children'
   | 'frontmatter___image___credit'
   | 'frontmatter___image___creditlink'
+  | 'frontmatter___tags'
   | 'frontmatter___steps'
-  | 'frontmatter___ingredients'
-  | 'frontmatter___ingredients___name'
-  | 'frontmatter___ingredients___amount'
-  | 'frontmatter___ingredients___unit'
-  | 'frontmatter___ingredients___step'
   | 'slug'
   | 'body'
   | 'excerpt'
@@ -1624,14 +1626,15 @@ export type MdxFilterInput = {
 
 export type MdxFrontmatter = {
   title: Scalars['String'];
+  slug?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['Date']>;
   description?: Maybe<Scalars['String']>;
-  categories?: Maybe<Array<Maybe<Scalars['String']>>>;
-  comments?: Maybe<Scalars['Boolean']>;
-  slug?: Maybe<Scalars['String']>;
-  image?: Maybe<MdxFrontmatterImage>;
-  steps?: Maybe<Array<Maybe<Scalars['String']>>>;
+  category?: Maybe<Scalars['String']>;
   ingredients?: Maybe<Array<Maybe<MdxFrontmatterIngredients>>>;
+  comments?: Maybe<Scalars['Boolean']>;
+  image?: Maybe<MdxFrontmatterImage>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  steps?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -1644,14 +1647,15 @@ export type MdxFrontmatterDateArgs = {
 
 export type MdxFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
   date?: Maybe<DateQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
-  categories?: Maybe<StringQueryOperatorInput>;
-  comments?: Maybe<BooleanQueryOperatorInput>;
-  slug?: Maybe<StringQueryOperatorInput>;
-  image?: Maybe<MdxFrontmatterImageFilterInput>;
-  steps?: Maybe<StringQueryOperatorInput>;
+  category?: Maybe<StringQueryOperatorInput>;
   ingredients?: Maybe<MdxFrontmatterIngredientsFilterListInput>;
+  comments?: Maybe<BooleanQueryOperatorInput>;
+  image?: Maybe<MdxFrontmatterImageFilterInput>;
+  tags?: Maybe<StringQueryOperatorInput>;
+  steps?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MdxFrontmatterImage = {
@@ -3081,7 +3085,7 @@ export type BlogPageQueryVariables = Exact<{
 export type BlogPageQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, allMdx: { edges: Array<{ node: (
         Pick<Mdx, 'excerpt'>
         & { fields?: Maybe<Pick<MdxFields, 'slug'>>, frontmatter?: Maybe<(
-          Pick<MdxFrontmatter, 'date' | 'title' | 'description'>
+          Pick<MdxFrontmatter, 'date' | 'title' | 'description' | 'category' | 'tags'>
           & { image?: Maybe<{ feature?: Maybe<{ childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluidFragment> }> }> }> }
         )> }
       ) }> } };
@@ -3094,7 +3098,7 @@ export type BlogPostBySlugQueryVariables = Exact<{
 export type BlogPostBySlugQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, mdx?: Maybe<(
     Pick<Mdx, 'id' | 'excerpt' | 'body'>
     & { frontmatter?: Maybe<(
-      Pick<MdxFrontmatter, 'title' | 'date' | 'description' | 'steps'>
+      Pick<MdxFrontmatter, 'title' | 'date' | 'description' | 'category' | 'tags' | 'steps'>
       & { image?: Maybe<(
         Pick<MdxFrontmatterImage, 'credit'>
         & { feature?: Maybe<{ childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluidFragment> }> }> }

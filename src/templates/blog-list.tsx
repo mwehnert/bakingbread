@@ -39,6 +39,7 @@ const BlogIndex = ({
               description={node.frontmatter.description || node.excerpt}
               date={node.frontmatter.date}
               image={node.frontmatter?.image as MdxFrontmatterImage}
+              tags={node.frontmatter?.tags as string[]}
             />
           )
         })}

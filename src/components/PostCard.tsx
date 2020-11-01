@@ -3,6 +3,7 @@ import BackgroundImage from "gatsby-background-image"
 import React from "react"
 import { MdxFrontmatterImage } from "../../gatsby-graphql"
 import useTheme from "../hooks/useTheme"
+import Tags from "./Tags"
 
 interface PostCardProps {
   slug: string
@@ -10,6 +11,7 @@ interface PostCardProps {
   description: string
   date: string
   image?: MdxFrontmatterImage
+  tags: string[]
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -18,6 +20,7 @@ const PostCard: React.FC<PostCardProps> = ({
   description = "",
   date,
   image = {},
+  tags,
 }) => {
   const hasFeatureImage = !!image?.feature?.childImageSharp?.fluid
   return (
@@ -59,6 +62,7 @@ const PostCard: React.FC<PostCardProps> = ({
             />
           </div>
           <div className="flex items-center">
+            <Tags tags={tags} />
             <div className="text-sm">
               <p>{date}</p>
             </div>

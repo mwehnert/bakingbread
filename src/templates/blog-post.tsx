@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import Image, { FluidObject } from "gatsby-image"
 
 import Bio from "../components/Bio"
 import Layout from "../components/Layout"
@@ -30,13 +31,17 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
       />
       <article>
         <header>
-          {post.frontmatter.image?.feature && (
-            <img
-              className="mt-16 mb-0 h-64 w-full object-cover"
-              src={post.frontmatter.image.feature}
+          {post.frontmatter.image?.feature?.childImageSharp?.fluid && (
+            <Image
               alt={post.frontmatter.image.credit || ""}
+              className="mt-16 mb-0 h-64 w-full object-cover rounded"
+              fluid={
+                post.frontmatter.image?.feature?.childImageSharp
+                  ?.fluid as FluidObject
+              }
             />
           )}
+          <h2>{post.frontmatter.category}</h2>
           <h1
             style={{
               marginBottom: 0,
@@ -122,6 +127,8 @@ export const pageQuery = graphql`
             }
           }
         }
+        category
+        tags
         steps
         ingredients {
           name
