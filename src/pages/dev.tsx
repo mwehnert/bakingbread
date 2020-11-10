@@ -5,7 +5,6 @@ import Layout from "../components/Layout"
 import SEO from "../components/Seo"
 import { BlogPageQuery, MdxFrontmatterImage } from "../../gatsby-graphql"
 import PostCard from "../components/PostCard"
-import EmptyState from "../assets/moving-in.svg"
 
 type PageContext = {
   currentPage: number
@@ -16,7 +15,7 @@ const BlogIndex = ({
   data,
   pageContext,
 }: PageProps<BlogPageQuery, PageContext>): ReactElement => {
-  const posts = data.allMdx.edges.filter(({ node }) => !node?.frontmatter?.dev)
+  const posts = data.allMdx.edges
   const { currentPage, numPages } = pageContext
 
   const isFirst = currentPage === 1
@@ -45,13 +44,6 @@ const BlogIndex = ({
             />
           )
         })}
-        {posts.length === 0 && (
-          <div className="flex h-1/2  items-center justify-center">
-            <h2 className="font-sans weight-light align-center">
-              Oh, hi! Wir ziehen gerade noch ein. Komm gerne später wieder...
-            </h2>
-          </div>
-        )}
       </div>
       <nav>
         <ul
@@ -86,7 +78,7 @@ const BlogIndex = ({
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query blogPage($skip: Int!, $limit: Int!) {
+  query blogPage {
     site {
       siteMetadata {
         title
