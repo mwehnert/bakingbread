@@ -5,6 +5,7 @@ import Layout from "../components/Layout"
 import SEO from "../components/Seo"
 import { BlogPageQuery, MdxFrontmatterImage } from "../../gatsby-graphql"
 import PostCard from "../components/PostCard"
+import EmptyState from "../assets/moving-in.svg"
 
 type PageContext = {
   currentPage: number
@@ -45,6 +46,7 @@ const BlogIndex = ({
             />
           )
         })}
+        {posts.length === 0 && <EmptyState />}
       </div>
       <nav>
         <ul

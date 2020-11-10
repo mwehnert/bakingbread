@@ -19,6 +19,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Dev only", name: "dev", widget: "boolean", default: true }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - {
           label: "Description",
