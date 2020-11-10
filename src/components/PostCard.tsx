@@ -4,14 +4,16 @@ import React from "react"
 import { MdxFrontmatterImage } from "../../gatsby-graphql"
 import useTheme from "../hooks/useTheme"
 import Tags from "./Tags"
+import { formatGermanRelativeDate } from "../utils/helpers"
 
 interface PostCardProps {
   slug: string
   title: string
   description: string
-  date: string
+  date: Date
   image?: MdxFrontmatterImage
-  tags: string[]
+  tags?: string[]
+  category?: string
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -20,7 +22,8 @@ const PostCard: React.FC<PostCardProps> = ({
   description = "",
   date,
   image = {},
-  tags,
+  tags = [],
+  category = "",
 }) => {
   const hasFeatureImage = !!image?.feature?.childImageSharp?.fluid
   return (
@@ -51,8 +54,21 @@ const PostCard: React.FC<PostCardProps> = ({
           }}
         >
           <div className="mb-8">
-            <p className="text-sm flex items-center">Category</p>
-            <h2 className="font-bold text-xl mt-0 mb-2">{title}</h2>
+            <div className="flex min-h-4 mb-2 items-center justify-between">
+              <span className="text-xs">{formatGermanRelativeDate(date)}</span>
+              {category && (
+                <span
+                  style={{
+                    backgroundColor: "var(--invertLightBg)",
+                    color: "var(--lightBg)",
+                  }}
+                  className="inline-block rounded-full px-3 py-1 text-xs font-semibold"
+                >
+                  {category}
+                </span>
+              )}
+            </div>
+            <h2 className="font-bold font-sans mt-0 mb-2">{title}</h2>
             <p
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{
@@ -61,10 +77,9 @@ const PostCard: React.FC<PostCardProps> = ({
               className="text-grey-darker text-base"
             />
           </div>
-          <div className="flex items-center">
-            <Tags tags={tags} />
-            <div className="text-sm">
-              <p>{date}</p>
+          <div className="flex flex-col">
+            <div className="mt-2">
+              <Tags tags={tags} />
             </div>
           </div>
         </div>

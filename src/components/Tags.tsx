@@ -12,7 +12,13 @@ const Tags: React.FC<TagsProps> = ({ tags = [] }) => {
     <section>
       {tags &&
         tags.map((tag) => (
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+          <span
+            style={{
+              backgroundColor: "var(--lightBg)",
+              color: "var(--textNormal)",
+            }}
+            className="inline-block rounded-sm px-2 py-1 text-xs font-semibold mr-2 mb-2"
+          >
             #{tag}
           </span>
         ))}

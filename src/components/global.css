@@ -7,6 +7,7 @@ body {
   --textTitle: #171717;
   --textLink: #fd5e53;
   --hr: hsla(0, 20%, 1%, 0.2);
+  --invertLightBg: #26262d;
 
   background-color: var(--bg);
 }
@@ -20,6 +21,7 @@ body.dark {
   --textTitle: #fff;
   --textLink: #ff6363;
   --hr: hsla(0, 0%, 100%, 0.2);
+  --invertLightBg: #f8f7f5;
 }
 
 a.gatsby-resp-image-link {

@@ -26,6 +26,7 @@ const BlogIndex = ({
   return (
     <Layout>
       <SEO title="All posts" />
+      <h1 className="font-light">Posts</h1>
       <div className="mt-24">
         {posts.map(({ node }) => {
           const title = node?.frontmatter?.title || node?.fields?.slug
@@ -40,6 +41,7 @@ const BlogIndex = ({
               date={node.frontmatter.date}
               image={node.frontmatter?.image as MdxFrontmatterImage}
               tags={node.frontmatter?.tags as string[]}
+              category={node.frontmatter?.category as string}
             />
           )
         })}
@@ -95,7 +97,7 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date
             title
             description
             category

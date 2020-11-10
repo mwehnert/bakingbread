@@ -65,7 +65,7 @@ const Layout: React.FC = ({ children }) => {
 
       <div className="w-full main-content px-8 absolute top-topbar lg:top-0 lg:h-screen lg:w-not-sidebar lg:ml-sidebar lg:px-40 lg:py-0">
         <div className="w-full mx-auto" style={{ maxWidth: "800px" }}>
-          <main>{children}</main>lg
+          <main>{children}</main>
           <Footer />
         </div>
       </div>
