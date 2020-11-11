@@ -8,6 +8,7 @@ import Layout from "../components/Layout"
 import SEO from "../components/Seo"
 import { rhythm, scale } from "../utils/typography"
 import { BlogPostBySlugQuery, SitePageContext } from "../../gatsby-graphql"
+import Category from "../components/Category"
 
 interface BlogPostTemplateProps {
   data: BlogPostBySlugQuery
@@ -41,7 +42,7 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
               }
             />
           )}
-          <h2>{post.frontmatter.category}</h2>
+          <Category>{post.frontmatter.category}</Category>
           <h1
             style={{
               marginBottom: 0,

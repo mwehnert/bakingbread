@@ -5,6 +5,7 @@ import { MdxFrontmatterImage } from "../../gatsby-graphql"
 import useTheme from "../hooks/useTheme"
 import Tags from "./Tags"
 import { formatGermanRelativeDate } from "../utils/helpers"
+import Category from "./Category"
 
 interface PostCardProps {
   slug: string
@@ -56,19 +57,9 @@ const PostCard: React.FC<PostCardProps> = ({
           <div className="mb-8">
             <div className="flex min-h-4 mb-2 items-center justify-between">
               <span className="text-xs">{formatGermanRelativeDate(date)}</span>
-              {category && (
-                <span
-                  style={{
-                    backgroundColor: "var(--invertLightBg)",
-                    color: "var(--lightBg)",
-                  }}
-                  className="inline-block rounded-full px-3 py-1 text-xs font-semibold"
-                >
-                  {category}
-                </span>
-              )}
+              {category && <Category>{category}</Category>}
             </div>
-            <h2 className="font-bold font-sans mt-0 mb-2">{title}</h2>
+            <h2 className="font-normal font-sans mt-0 mb-2">{title}</h2>
             <p
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{

@@ -78,17 +78,13 @@ const BlogIndex = ({
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query blogPage {
+  query blogDevPage {
     site {
       siteMetadata {
         title
       }
     }
-    allMdx(
-      sort: { fields: [frontmatter___date], order: DESC }
-      limit: $limit
-      skip: $skip
-    ) {
+    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           excerpt

@@ -47,7 +47,7 @@ const BlogIndex = ({
         })}
         {posts.length === 0 && (
           <div className="flex h-1/2  items-center justify-center">
-            <h2 className="font-sans weight-light align-center">
+            <h2 className="font-sans font-light align-center">
               Oh, hi! Wir ziehen gerade noch ein. Komm gerne später wieder...
             </h2>
           </div>

@@ -2,6 +2,10 @@ module.exports = {
   important: true,
   purge: ["./src/**/*.js", "./src/**/*.jsx", "./src/**/*.ts", "./src/**/*.tsx"],
   theme: {
+    fontFamily: {
+      display: ["Gilroy", "sans-serif"],
+      body: ["Graphik", "sans-serif"],
+    },
     extend: {
       backgroundImage: () => ({
         "sidebar-pattern-light": `url("/images/loafpattern-dark.svg")`,

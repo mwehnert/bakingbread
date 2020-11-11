@@ -51,6 +51,7 @@ const Layout: React.FC = ({ children }) => {
         transition: "color 0.2s ease-out, background 0.2s ease-out",
         minHeight: "100vh",
       }}
+      className="font-sans font-light"
     >
       <div className="sidebar h-topbar w-full lg:h-screen lg:w-sidebar fixed top-0 text-center">
         <div
